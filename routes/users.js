@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const UserDao = require('../db/dao/UserDao')
+const UserService = require('../service/user_service')
 router.prefix('/users')
 
 router.get('/', function (ctx, next) {
@@ -10,7 +10,27 @@ router.get('/', function (ctx, next) {
 
 router.get('/find', async function (ctx, next) {
 
-     ctx.body = await UserDao.find(ctx.query)
+     ctx.body = await UserService.find(ctx.query)
+
+})
+router.get('/save', async function (ctx, next) {
+
+    ctx.body = await UserService.save(ctx.query)
+
+})
+router.get('/delete', async function (ctx, next) {
+
+     ctx.body = await UserService.delete(ctx.query)
+
+})
+router.get('/updata', async function (ctx, next) {
+
+     ctx.body = await UserService.updata(ctx.query)
+
+})
+router.get('/count', async function (ctx, next) {
+
+     ctx.body = await UserService.count(ctx.query)
 
 })
 

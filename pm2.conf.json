@@ -1,0 +1,19 @@
+{
+  "name": "koa2_s3",
+  "script": "./bin/www",
+  "cwd": "./",
+  "watch": [
+    "config",
+    "db",
+    "routes",
+    "service",
+    "views",
+    "public",
+    "app.js"
+  ],
+  "ignore_watch": [
+    "node_modules",
+    "log"
+  ],
+  "error_file": "./log/pm2/error.log"
+}
