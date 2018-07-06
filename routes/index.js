@@ -2,8 +2,20 @@ const router = require('koa-router')()
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
-    title: 'LWT'
+    title: 'LWT',
   })
+})
+router.get('/play', async (ctx, next) => {
+  await ctx.render('play', {
+    title: ctx.query.name,
+    name:"upload/"+ctx.query.name
+  })
+})
+
+router.get('/upload', async (ctx, next) => {
+    await ctx.render('upload', {
+
+    })
 })
 
 router.get('/string', async (ctx, next) => {
