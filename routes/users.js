@@ -13,6 +13,13 @@ router.get('/find', async function (ctx, next) {
      ctx.body = await UserService.find(ctx.query)
 
 })
+
+router.post('/login', async function (ctx, next) {
+
+    //校验参数
+     ctx.body = await UserService.find(ctx.request.body)
+
+})
 router.get('/save', async function (ctx, next) {
 
     ctx.body = await UserService.save(ctx.query)

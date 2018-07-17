@@ -6,7 +6,11 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaBody = require('koa-body');
+//跨域访问
+var cors = require('koa2-cors');
 
+
+//路由文件
 const index = require('./routes/index')
 const users = require('./routes/users')
 const upload = require('./routes/upload')
@@ -18,6 +22,21 @@ onerror(app)
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+
+//跨域访问
+app.use(cors({
+    origin: function(ctx) {
+        if (ctx.url === '/test') {
+            return false;
+        }
+        return '*';
+    },
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
 
 app.use(koaBody({
     multipart: true,

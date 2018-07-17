@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path');
 const  config=require('../config')
 var HttpResult=require('../config/https')
+
 router.post('/uploadfile', async (ctx, next) => {
 
     var result = new HttpResult()
@@ -26,9 +27,32 @@ router.post('/uploadfile', async (ctx, next) => {
     // 可读流通过管道写入可写流
     reader.pipe(upStream);
 
-    result.changeData({path:fileUploadPath+"/"+file.name})
+    result.changeData({path:fileUploadPath+"/"+file.name,name:ctx.request.body.name})
 
     return ctx.body = result;
 });
+
+
+router.get('/needDown', async function (ctx, next) {
+
+    var result=new HttpResult()
+
+    var code = ctx.query.version
+   if (code){
+
+        if (code < 1) {
+
+            result.changeData({path:"upload/app710.apk",needDown:true})
+
+        }else{
+            result.changeData({path:"",needDown:false})
+        }
+
+   }
+
+
+    ctx.body = result
+
+})
 
 module.exports = router
